@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Building2, House, Video } from "lucide-react";
+import { House, Video } from "lucide-react";
 import { Botanical } from "@/components/botanical";
 import { Container } from "@/components/container";
 import { Cta } from "@/components/cta";
@@ -10,7 +10,7 @@ import { packages, serviceArea, site } from "@/lib/site";
 export const metadata: Metadata = pageMetadata({
   title: "Leche 4 Life Lactation | Amanda Howell, IBCLC",
   description:
-    "Holistic lactation support for Charlotte-area families. Amanda Howell, IBCLC, offers virtual, home, and in-office visits from Concord, North Carolina.",
+    "Holistic lactation support for Charlotte-area families. Amanda Howell, IBCLC, offers home and virtual visits. Based in Concord, North Carolina.",
   path: "/",
   absolute: true,
 });
@@ -25,11 +25,6 @@ const visits = [
     title: "Home",
     icon: House,
     body: "Amanda comes to you. Home visits cover the greater Charlotte metro, so feeding can be assessed where it actually happens.",
-  },
-  {
-    title: "In-office",
-    icon: Building2,
-    body: "Appointments at Vida Wellness Center, with time to slow down and look at feeding in a quiet room.",
   },
 ];
 
@@ -60,7 +55,7 @@ export default function HomePage() {
             </div>
             <ul className="mt-8 flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-x-6">
               <li>Supporting families since 2005</li>
-              <li>Virtual, home, and in-office</li>
+              <li>Home and virtual visits</li>
               <li>Greater Charlotte metro</li>
             </ul>
           </div>
@@ -75,13 +70,13 @@ export default function HomePage() {
               </div>
               <div className="relative z-10 -mt-8 ml-4 max-w-sm rounded-2xl border border-sage/50 bg-white p-5 shadow-[0_16px_40px_rgba(81,81,66,0.08)] sm:ml-8">
                 <p className="text-xs font-semibold tracking-[0.16em] uppercase">
-                  In-office
+                  Visits
                 </p>
-                <p className="mt-2 font-display text-3xl">{site.office}</p>
+                <p className="mt-2 font-display text-3xl">Home and virtual</p>
                 <p className="mt-1 text-sm leading-relaxed">
-                  {site.addressLines[0]}
+                  Greater Charlotte metro
                   <br />
-                  {site.addressLines[1]}
+                  Based in Concord, North Carolina
                 </p>
               </div>
             </div>
@@ -96,10 +91,10 @@ export default function HomePage() {
             How I work
           </h2>
           <p className="lede mt-5 max-w-2xl">
-            Same clinician, three ways to meet. Choose what fits the week you
+            Same clinician, two ways to meet. Choose what fits the week you
             are in.
           </p>
-          <div className="mt-12 grid gap-6 md:grid-cols-3 lg:mt-14 lg:gap-8">
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:mt-14 lg:max-w-5xl lg:gap-8">
             {visits.map((visit) => (
               <article
                 key={visit.title}
@@ -110,13 +105,6 @@ export default function HomePage() {
                 </span>
                 <h3 className="mt-6 text-3xl">{visit.title}</h3>
                 <p className="mt-3 leading-relaxed">{visit.body}</p>
-                {visit.title === "In-office" ? (
-                  <p className="mt-5 border-t border-sage/60 pt-5 text-sm leading-relaxed">
-                    {site.office}
-                    <br />
-                    {site.addressSingle}
-                  </p>
-                ) : null}
                 {visit.title === "Home" ? (
                   <p className="mt-5 border-t border-sage/60 pt-5 text-sm leading-relaxed">
                     {serviceArea.join(" · ")}

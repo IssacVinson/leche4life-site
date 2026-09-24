@@ -64,23 +64,11 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <dt className="text-xs font-semibold tracking-[0.16em] uppercase">
-                    Office
+                    Visits
                   </dt>
                   <dd className="mt-1 leading-relaxed">
-                    {site.office}
-                    <br />
-                    {site.addressLines[0]}
-                    <br />
-                    {site.addressLines[1]}
-                    <a
-                      href={site.mapsHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-2 inline-block font-medium underline decoration-blush decoration-2 underline-offset-4"
-                    >
-                      Open in Google Maps
-                      <span className="sr-only"> (opens in a new tab)</span>
-                    </a>
+                    Home visits in {serviceArea.join(", ")}. Virtual visits
+                    are available beyond that drive.
                   </dd>
                 </div>
                 <div>
@@ -110,10 +98,6 @@ export default function ContactPage() {
                 </div>
               </dl>
             </div>
-            <p className="mt-6 text-sm leading-relaxed">
-              Home visits: {serviceArea.join(", ")}. Virtual visits are
-              available beyond that drive.
-            </p>
           </aside>
         </Container>
       </section>

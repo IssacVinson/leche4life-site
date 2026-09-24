@@ -5,11 +5,6 @@ export const site = {
   phoneHref: "tel:+19803131037",
   email: "amanda@leche4lifelactation.com",
   emailHref: "mailto:amanda@leche4lifelactation.com",
-  addressLines: ["185 Church St NE", "Concord, NC 28025"],
-  addressSingle: "185 Church St NE, Concord, NC 28025",
-  office: "Vida Wellness Center",
-  mapsHref:
-    "https://www.google.com/maps/search/?api=1&query=185+Church+St+NE%2C+Concord%2C+NC+28025",
   instagram: "https://www.instagram.com/leche4lifelactation/",
   instagramFoods: "https://www.instagram.com/l4lfoods/",
   facebook: "https://www.facebook.com/leche4life",
@@ -145,7 +140,7 @@ export const packages: PackageGroup[] = [
         pitch:
           "A single consult when you want an experienced set of eyes, not an ongoing package.",
         includes: [
-          "One visit, virtual, at home, or in the Concord office",
+          "One visit, virtual or at home",
           "Assessment, teaching, and a plan you leave with",
           "A fit for a specific question: bottles, pumping, solids, work, or weight",
           "Honest guidance about whether one visit is enough",

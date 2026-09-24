@@ -25,9 +25,9 @@ export default function ServicesPage() {
       <section className="bg-page">
         <Container className="py-16 lg:py-20">
           <p className="max-w-2xl leading-relaxed">
-            Visits can be virtual, in your home across the greater Charlotte
-            metro, or at the Concord office. If you are not sure which package
-            fits, book a discovery call and Amanda will help you choose.
+            Visits are virtual, or in your home across the greater Charlotte
+            metro. If you are not sure which package fits, book a discovery
+            call and Amanda will help you choose.
           </p>
           <div className="mt-10">
             <PackageTabs />
