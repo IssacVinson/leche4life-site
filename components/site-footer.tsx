@@ -46,20 +46,12 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <a
-                href={site.mapsHref}
-                className="hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {site.office}
-                <span className="mt-1 block">
-                  {site.addressLines[0]}
-                  <br />
-                  {site.addressLines[1]}
-                </span>
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
+              Home and virtual visits
+              <span className="mt-1 block">
+                Greater Charlotte metro
+                <br />
+                Based in Concord, North Carolina
+              </span>
             </li>
             <li className="pt-2">
               <a

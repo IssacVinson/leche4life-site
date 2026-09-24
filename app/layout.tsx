@@ -22,7 +22,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 const description =
-  "Holistic lactation support for Charlotte-area families. Amanda Howell, IBCLC, offers virtual, home, and in-office visits from Concord, North Carolina.";
+  "Holistic lactation support for Charlotte-area families. Amanda Howell, IBCLC, offers home and virtual visits. Based in Concord, North Carolina.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -55,14 +55,6 @@ const jsonLd = {
   url: "https://leche4lifelactation.com",
   telephone: "+1-980-313-1037",
   email: site.email,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "185 Church St NE",
-    addressLocality: "Concord",
-    addressRegion: "NC",
-    postalCode: "28025",
-    addressCountry: "US",
-  },
   areaServed: "Greater Charlotte metro",
   employee: {
     "@type": "Person",

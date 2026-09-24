@@ -43,8 +43,7 @@ export default function AboutPage() {
             </p>
             <p>
               She is based in Concord and sees families across the greater
-              Charlotte metro — in your home, virtually, and in-office at{" "}
-              {site.office}. The address is {site.addressSingle}.
+              Charlotte metro — in your home and virtually.
             </p>
             <p>
               Amanda is a mother of five. Her care is holistic and integrative:
@@ -67,8 +66,8 @@ export default function AboutPage() {
           <div className="lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
             <div className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-[2rem] lg:mx-0 lg:aspect-auto lg:h-full lg:max-w-none lg:min-h-[28rem]">
               <Image
-                src={publicPath("/images/Agalma-VIDA.jpg")}
-                alt="Amanda Howell, IBCLC, in her office at Vida Wellness Center."
+                src={publicPath("/images/amanda-howell.jpg")}
+                alt="Portrait of Amanda Howell, IBCLC."
                 fill
                 priority
                 sizes="(min-width: 1024px) 36vw, min(28rem, 100vw)"

@@ -87,4 +87,5 @@ Replace that string with a specific Calendly event link when you have one. The b
 ## What this site does not do
 
 - No package prices. Every package says pricing is discussed on a discovery call.
+- No practice address. Care is home visits and virtual visits. Concord is where Amanda is based.
 - No server. There is no `/api/contact` route and no on-the-fly image optimizer.
