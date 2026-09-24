@@ -3,5 +3,5 @@ export function getSiteUrl() {
   if (configured) return configured.replace(/\/$/, "");
   const vercel = process.env.VERCEL_URL?.trim();
   if (vercel) return `https://${vercel.replace(/^https?:\/\//, "")}`;
-  return "https://leche4lifelactation.com";
+  return "https://www.leche4lifelactation.com";
 }
