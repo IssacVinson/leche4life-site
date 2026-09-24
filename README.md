@@ -58,7 +58,21 @@ The form reads `NEXT_PUBLIC_FORMSPREE_ID` at **build** time. Set it as a GitHub 
 4. Add a repository variable named `NEXT_PUBLIC_FORMSPREE_ID` with that id.
 5. Re-run **Deploy to GitHub Pages** from the Actions tab. A new build has to run before the live site will send. Pushing to `main` does the same thing.
 
-Until that variable is set, the contact form does not submit and does not show a success state. It tells the visitor to email `amanda@leche4lifelactation.com` or call `980-313-1037`.
+Until that variable is set, the contact form does not submit and does not show a success state. The page still shows the questions, and tells the visitor to email `amanda@leche4lifelactation.com` or call `980-313-1037`.
+
+The public form is a short lactation consult request, not a clinical intake. Formspree receives these fields:
+
+| Field | Required | Formspree name |
+| --- | --- | --- |
+| Full name | Yes | `name` |
+| Email | Yes | `email` |
+| Phone | Yes | `phone` |
+| Where are you in your journey? (Pregnant or Baby is here) | Yes | `journey` |
+| Baby’s due date (only if Pregnant) | Yes | `baby_due_date` |
+| Baby’s date of birth (only if Baby is here) | Yes | `baby_date_of_birth` |
+| Town and state | Yes | `town_and_state` |
+| What’s been challenging about feeding? / How can I support you? | Yes | `feeding_challenge` |
+| How did you hear about Leche 4 Life? | No | `how_did_you_hear` |
 
 ## Booking
 

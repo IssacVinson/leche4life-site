@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { site } from "@/lib/site";
+import { cn } from "cn";
 
 const fieldClass =
   "h-12 rounded-xl border-sage bg-white px-3.5 text-base text-ink md:text-base";
@@ -13,18 +14,10 @@ const fieldClass =
 const linkClass =
   "font-medium underline decoration-blush decoration-2 underline-offset-4";
 
+const journeys = ["Pregnant", "Baby is here"] as const;
+type Journey = (typeof journeys)[number];
+
 type Status = "idle" | "sending" | "sent" | "error";
-
-const mentorshipNote =
-  "I'd like to ask about mentorship for an IBCLC intern or a doula.";
-
-function subscribeToTopic() {
-  return () => {};
-}
-
-function getTopic() {
-  return new URLSearchParams(window.location.search).get("topic") ?? "";
-}
 
 function formspreeId() {
   const id = process.env.NEXT_PUBLIC_FORMSPREE_ID?.trim() ?? "";
@@ -49,24 +42,14 @@ function fallbackCopy() {
 
 export function ContactForm() {
   const id = formspreeId();
-  const topic = useSyncExternalStore(subscribeToTopic, getTopic, () => "");
-  const [message, setMessage] = useState<string | null>(null);
+  const [journey, setJourney] = useState<Journey | "">("");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
-  const messageValue = message ?? (topic === "mentorship" ? mentorshipNote : "");
-
-  if (!id) {
-    return (
-      <div role="status" className="rounded-3xl bg-cream px-6 py-8 sm:px-8">
-        <p className="leading-relaxed">
-          This form is not set up to send yet. {fallbackCopy()}
-        </p>
-      </div>
-    );
-  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!id) return;
+
     const form = event.currentTarget;
     const data = new FormData(form);
     if (String(data.get("_gotcha") || "").trim()) {
@@ -87,7 +70,7 @@ export function ContactForm() {
         throw new Error("Request failed");
       }
       form.reset();
-      setMessage("");
+      setJourney("");
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -118,12 +101,20 @@ export function ContactForm() {
 
   return (
     <form
-      action={`https://formspree.io/f/${id}`}
+      action={id ? `https://formspree.io/f/${id}` : undefined}
       method="POST"
       onSubmit={onSubmit}
       className="space-y-5"
       noValidate={false}
     >
+      {!id ? (
+        <div role="status" className="rounded-3xl bg-cream px-6 py-8 sm:px-8">
+          <p className="leading-relaxed">
+            This form is not set up to send yet. {fallbackCopy()}
+          </p>
+        </div>
+      ) : null}
+
       <input
         type="text"
         name="_gotcha"
@@ -139,7 +130,7 @@ export function ContactForm() {
       />
 
       <div className="space-y-2">
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="name">Full name</Label>
         <Input id="name" name="name" autoComplete="name" required className={fieldClass} />
       </div>
       <div className="space-y-2">
@@ -164,17 +155,92 @@ export function ContactForm() {
           className={fieldClass}
         />
       </div>
+
+      <fieldset className="space-y-3">
+        <legend className="text-sm font-medium">Where are you in your journey?</legend>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {journeys.map((option) => {
+            const selected = journey === option;
+            return (
+              <label
+                key={option}
+                className={cn(
+                  "flex cursor-pointer items-center gap-3 rounded-xl border border-sage bg-white px-4 py-3 text-base text-ink",
+                  selected && "border-ink bg-cream",
+                )}
+              >
+                <input
+                  type="radio"
+                  name="journey"
+                  value={option}
+                  required
+                  checked={selected}
+                  onChange={() => setJourney(option)}
+                  className="size-4 accent-ink"
+                />
+                {option}
+              </label>
+            );
+          })}
+        </div>
+      </fieldset>
+
+      {journey === "Pregnant" ? (
+        <div className="space-y-2">
+          <Label htmlFor="baby-due-date">Baby’s due date</Label>
+          <Input
+            id="baby-due-date"
+            name="baby_due_date"
+            type="date"
+            required
+            className={fieldClass}
+          />
+        </div>
+      ) : null}
+
+      {journey === "Baby is here" ? (
+        <div className="space-y-2">
+          <Label htmlFor="baby-birth-date">Baby’s date of birth</Label>
+          <Input
+            id="baby-birth-date"
+            name="baby_date_of_birth"
+            type="date"
+            required
+            className={fieldClass}
+          />
+        </div>
+      ) : null}
+
       <div className="space-y-2">
-        <Label htmlFor="message">Message</Label>
-        <Textarea
-          id="message"
-          name="message"
+        <Label htmlFor="town-and-state">Town and state</Label>
+        <Input
+          id="town-and-state"
+          name="town_and_state"
+          autoComplete="address-level2"
           required
-          value={messageValue}
-          onChange={(event) => setMessage(event.target.value)}
-          className="min-h-40 rounded-xl border-sage bg-white px-3.5 py-3 text-base text-ink md:text-base"
-          placeholder="How you are feeding, your baby’s age if they are here, and whether you prefer virtual, home, or office."
+          className={fieldClass}
+          placeholder="Concord, NC"
         />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="feeding-challenge">
+          What’s been challenging about feeding? / How can I support you?
+        </Label>
+        <Textarea
+          id="feeding-challenge"
+          name="feeding_challenge"
+          required
+          className="min-h-40 rounded-xl border-sage bg-white px-3.5 py-3 text-base text-ink md:text-base"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="how-did-you-hear">
+          How did you hear about Leche 4 Life?{" "}
+          <span className="font-normal text-ink/70">(optional)</span>
+        </Label>
+        <Input id="how-did-you-hear" name="how_did_you_hear" className={fieldClass} />
       </div>
 
       <p className="text-sm leading-relaxed">
@@ -187,13 +253,16 @@ export function ContactForm() {
         </p>
       ) : null}
 
-      <Button
-        type="submit"
-        disabled={status === "sending"}
-        className="h-12 rounded-full px-6 text-base font-medium hover:bg-primary hover:brightness-[0.97]"
-      >
-        {status === "sending" ? "Sending…" : "Send message"}
-      </Button>
+      {id ? (
+        <Button
+          type="submit"
+          disabled={status === "sending"}
+          className="h-12 rounded-full px-6 text-base font-medium hover:bg-primary hover:brightness-[0.97]"
+        >
+          {status === "sending" ? "Sending…" : "Send message"}
+        </Button>
+      ) : null}
+
       <p className="text-sm leading-relaxed">
         If you or your baby need urgent medical care, call your provider or 911.
         This form is not an emergency line.
