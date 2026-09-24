@@ -2,9 +2,9 @@
 
 Marketing site for Amanda Howell, IBCLC. Five pages — Home, About, Services/Packages, Resources/Podcast, and Contact — plus a contact form. **Book a consult** and the other booking buttons open [Amanda’s Calendly](https://calendly.com/amanda-leche4lifelactation) in a new tab. Contact stays a normal page in the navigation. There is no public package price.
 
-The live site is a static export on GitHub Pages: [https://issacvinson.github.io/leche4life-site/](https://issacvinson.github.io/leche4life-site/).
+The live site is a static export on GitHub Pages: [https://www.leche4lifelactation.com](https://www.leche4lifelactation.com).
 
-Canonical and social URLs stay on `https://leche4lifelactation.com`. That origin is the default in `lib/site-url.ts`.
+Canonical and social URLs use `https://www.leche4lifelactation.com`. That origin is the default in `lib/site-url.ts`.
 
 Stack: Next.js App Router, TypeScript, and design tokens in `app/tokens.css`.
 
@@ -32,7 +32,7 @@ npm install
 npm run dev
 ```
 
-Open [http://127.0.0.1:3847/leche4life-site](http://127.0.0.1:3847/leche4life-site). The `/leche4life-site` prefix matches GitHub Pages.
+Open [http://127.0.0.1:3847](http://127.0.0.1:3847).
 
 ```bash
 npm run build
@@ -44,9 +44,31 @@ npm run build
 
 Pushes to `main` run `.github/workflows/deploy.yml`, which builds the static export and deploys it with GitHub Actions. Pages for this repo is already set to deploy from Actions.
 
-`next.config.ts` sets `output: "export"` and `basePath: "/leche4life-site"`. Image optimization is off, because GitHub Pages has no Next.js server. The contact Route Handler is gone for the same reason; the form posts to Formspree from the browser.
+`next.config.ts` sets `output: "export"` and `trailingSlash: true`. There is no `basePath`: pages, images, CSS, and JS are served from the domain root. Image optimization is off, because GitHub Pages has no Next.js server. The contact Route Handler is gone for the same reason; the form posts to Formspree from the browser.
 
-`basePath` is also the constant in `lib/base-path.ts`. `next/image` does not add that prefix when optimization is off, so photo and mark URLs go through `publicPath()`.
+`basePath` in `lib/base-path.ts` is an empty string, kept in sync with `next.config.ts`. `next/image` does not add that prefix when optimization is off, so photo and mark URLs go through `publicPath()`.
+
+`trailingSlash: true` writes each route as a folder with `index.html` (for example `out/contact/index.html`). On GitHub Pages, `/contact/` is that file. A request for `/contact` redirects to `/contact/`, so both URLs resolve.
+
+## Custom domain
+
+`public/CNAME` contains `www.leche4lifelactation.com`. The static export copies it to `out/CNAME`, which is the root of the Pages artifact. In the repository, set **Settings → Pages → Custom domain** to `www.leche4lifelactation.com`. With the DNS records below, GitHub Pages redirects the apex `leche4lifelactation.com` to `www`. After the certificate is issued, turn on **Enforce HTTPS**.
+
+Point the website DNS at GitHub Pages. Do not change MX records or any other email records. Mail for `@leche4lifelactation.com` has to keep its current host.
+
+| Name | Type | Value |
+| --- | --- | --- |
+| `@` (apex) | A | `185.199.108.153` |
+| `@` (apex) | A | `185.199.109.153` |
+| `@` (apex) | A | `185.199.110.153` |
+| `@` (apex) | A | `185.199.111.153` |
+| `@` (apex) | AAAA (optional) | `2606:50c0:8000::153` |
+| `@` (apex) | AAAA (optional) | `2606:50c0:8001::153` |
+| `@` (apex) | AAAA (optional) | `2606:50c0:8002::153` |
+| `@` (apex) | AAAA (optional) | `2606:50c0:8003::153` |
+| `www` | CNAME | `issacvinson.github.io` |
+
+Replace the previous website records for the apex and `www` (the ones that pointed at the old host). Leave MX and other mail records as they are.
 
 ## Contact form (Formspree)
 

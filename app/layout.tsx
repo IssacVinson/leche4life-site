@@ -52,7 +52,7 @@ const jsonLd = {
   "@type": "LocalBusiness",
   name: site.name,
   description,
-  url: "https://leche4lifelactation.com",
+  url: `${getSiteUrl()}/`,
   telephone: "+1-980-313-1037",
   email: site.email,
   areaServed: "Greater Charlotte metro",

@@ -3,7 +3,8 @@ import { basePath } from "./lib/base-path";
 
 const nextConfig: NextConfig = {
   output: "export",
-  basePath,
+  trailingSlash: true,
+  ...(basePath ? { basePath } : {}),
   images: {
     unoptimized: true,
   },
