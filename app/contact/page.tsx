@@ -8,7 +8,7 @@ import { serviceArea, site } from "@/lib/site";
 export const metadata: Metadata = pageMetadata({
   title: "Contact",
   description:
-    "Contact Amanda Howell, IBCLC, at Leche 4 Life Lactation. Call 980-313-1037 or send a message to book a consult in Concord and the greater Charlotte metro.",
+    "Contact Amanda Howell, IBCLC, at Leche 4 Life Lactation. Fill out the short intake form and Amanda will text you with available times for in-home or virtual visits across the greater Charlotte metro.",
   path: "/contact",
 });
 
@@ -17,15 +17,15 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="Book a consult"
-        lede="Share a little about feeding and how you would like to meet. Amanda will follow up by phone or email. This form does not hold a calendar spot by itself."
+        title="Let’s get you some help"
+        lede="Share a little about you and your baby. What happens next: I’ll text you shortly with available times."
       />
 
       <section className="bg-page">
         <Container className="grid gap-12 py-16 lg:grid-cols-12 lg:gap-16 lg:py-20">
           <div className="lg:col-span-7">
             <div className="rounded-3xl border border-sage/70 bg-white p-6 sm:p-9">
-              <h2 className="text-4xl">Send a message</h2>
+              <h2 className="text-4xl">Tell me about you</h2>
               <p className="mt-3 leading-relaxed">
                 Prefer to call?{" "}
                 <a href={site.phoneHref} className="font-medium underline decoration-blush decoration-2 underline-offset-4">

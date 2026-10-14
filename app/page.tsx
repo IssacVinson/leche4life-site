@@ -4,8 +4,9 @@ import { House, Video } from "lucide-react";
 import { Botanical } from "@/components/botanical";
 import { Container } from "@/components/container";
 import { Cta } from "@/components/cta";
+import { PathCards } from "@/components/path-cards";
 import { pageMetadata } from "@/lib/seo";
-import { packages, serviceArea, site } from "@/lib/site";
+import { serviceArea, site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Leche 4 Life Lactation | Amanda Howell, IBCLC",
@@ -42,16 +43,13 @@ export default function HomePage() {
               IBCLC care from pregnancy through postpartum — so you can feed
               your baby with confidence.
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-              <Cta href={site.calendly} external>
-                Book a consult
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Cta href="/expecting/" className="font-semibold">
+                I’m Expecting
               </Cta>
-              <Link
-                href="/services"
-                className="text-base font-medium text-ink underline decoration-ink/30 underline-offset-4 hover:decoration-ink"
-              >
-                View services
-              </Link>
+              <Cta href="/baby-is-here/" className="font-semibold">
+                The Baby Is Here
+              </Cta>
             </div>
             <ul className="mt-8 flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-x-6">
               <li>Supporting families since 2005</li>
@@ -116,35 +114,15 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section aria-labelledby="services-heading" className="border-y border-sage/50 bg-white">
+      <section aria-labelledby="paths-heading" className="border-y border-sage/50 bg-white">
         <Container className="py-16 lg:py-20">
-          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="eyebrow">Services</p>
-              <h2 id="services-heading" className="mt-4 max-w-xl text-4xl sm:text-5xl">
-                Care for where you are right now
-              </h2>
-            </div>
-            <Cta href="/services">View services</Cta>
+          <p className="eyebrow">Where are you right now?</p>
+          <h2 id="paths-heading" className="mt-4 max-w-xl text-4xl sm:text-5xl">
+            Choose your path
+          </h2>
+          <div className="mt-12 lg:mt-14">
+            <PathCards />
           </div>
-          <ul className="mt-12 divide-y divide-sage/70 border-y border-sage/70 lg:mt-14">
-            {packages.map((group) => (
-              <li key={group.id}>
-                <Link
-                  href={`/services#${group.id}`}
-                  className="group grid gap-2 py-5 sm:grid-cols-[minmax(0,16rem)_1fr_auto] sm:items-baseline sm:gap-8"
-                >
-                  <span className="font-display text-3xl text-ink group-hover:underline">
-                    {group.label}
-                  </span>
-                  <span className="text-base leading-relaxed">{group.summary}</span>
-                  <span aria-hidden="true" className="hidden text-ink sm:inline">
-                    →
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
         </Container>
       </section>
 
@@ -200,12 +178,14 @@ export default function HomePage() {
             You don’t have to do this alone.
           </h2>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-cream">
-            Pick a time on Amanda’s calendar. If you would rather write first,
-            send a message from the contact page.
+            Start with where you are right now.
           </p>
-          <div className="mt-8">
-            <Cta href={site.calendly} external>
-              Book a consult
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Cta href="/expecting/" className="font-semibold">
+              I’m Expecting
+            </Cta>
+            <Cta href="/baby-is-here/" className="font-semibold">
+              The Baby Is Here
             </Cta>
           </div>
         </Container>

@@ -1,6 +1,6 @@
 # Leche 4 Life Lactation
 
-Marketing site for Amanda Howell, IBCLC. Five pages — Home, About, Services/Packages, Resources/Podcast, and Contact — plus a contact form. **Book a consult** and the other booking buttons open [Amanda’s Calendly](https://calendly.com/amanda-leche4lifelactation) in a new tab. Contact stays a normal page in the navigation. There is no public package price.
+Marketing site for Amanda Howell, IBCLC. Top menu: Home, About, I’m Expecting, The Baby Is Here, and Contact (button); Resources/Podcast lives in the footer. Every button on **I’m Expecting** opens [Amanda’s Calendly](https://calendly.com/amanda-leche4lifelactation) for a discovery call; every button on **The Baby Is Here** goes to the Contact intake form. Package names, prices, and copy live in `lib/site.ts`. `/services/` is a simple chooser that links to the two package pages.
 
 The live site is a static export on GitHub Pages: [https://www.leche4lifelactation.com](https://www.leche4lifelactation.com).
 
@@ -108,6 +108,6 @@ Replace that string with a specific Calendly event link when you have one. The b
 
 ## What this site does not do
 
-- No package prices. Every package says pricing is discussed on a discovery call.
+- No direct insurance billing. The Contact form explains superbills and FSA/HSA.
 - No practice address. Care is home visits and virtual visits. Concord is where Amanda is based.
 - No server. There is no `/api/contact` route and no on-the-fly image optimizer.

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { site } from "@/lib/site";
+import { insuranceNote, site } from "@/lib/site";
 import { cn } from "cn";
 
 const fieldClass =
@@ -85,8 +85,8 @@ export function ContactForm() {
       <div role="status" className="rounded-3xl bg-cream px-6 py-10 sm:px-8">
         <h2 className="text-4xl">Message sent</h2>
         <p className="mt-4 leading-relaxed">
-          Thank you. Your message was received. This note does not hold a spot
-          on the calendar by itself. Amanda will follow up by phone or email.
+          Thank you. Your message was received. I’ll text you shortly with
+          available times.
         </p>
         <button
           type="button"
@@ -126,7 +126,7 @@ export function ContactForm() {
       <input
         type="hidden"
         name="_subject"
-        value="Consult request from the Leche 4 Life website"
+        value="Intake form from the Leche 4 Life website"
       />
 
       <div className="space-y-2">
@@ -224,12 +224,12 @@ export function ContactForm() {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="feeding-challenge">
-          What’s been challenging about feeding? / How can I support you?
+        <Label htmlFor="main-concern">
+          What’s your main concern right now?
         </Label>
         <Textarea
-          id="feeding-challenge"
-          name="feeding_challenge"
+          id="main-concern"
+          name="main_concern"
           required
           className="min-h-40 rounded-xl border-sage bg-white px-3.5 py-3 text-base text-ink md:text-base"
         />
@@ -243,9 +243,13 @@ export function ContactForm() {
         <Input id="how-did-you-hear" name="how_did_you_hear" className={fieldClass} />
       </div>
 
-      <p className="text-sm leading-relaxed">
-        Amanda reads these herself and will follow up to find a time.
-      </p>
+      <div className="rounded-2xl bg-cream px-5 py-4 text-[0.98rem] leading-relaxed">
+        <p>
+          <strong className="font-semibold">What happens next:</strong> I’ll
+          text you shortly with available times.
+        </p>
+        <p className="mt-2">{insuranceNote}</p>
+      </div>
 
       {status === "error" ? (
         <p role="alert" className="rounded-2xl bg-blush px-4 py-3 text-sm leading-relaxed">
