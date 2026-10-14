@@ -1,48 +1,28 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/container";
-import { Cta } from "@/components/cta";
-import { PackageTabs } from "@/components/package-tabs";
 import { PageHero } from "@/components/page-hero";
+import { PathCards } from "@/components/path-cards";
 import { pageMetadata } from "@/lib/seo";
-import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Services/Packages",
+  title: "Packages",
   description:
-    "Prenatal, postpartum, signature, emergency, and tongue-tie lactation packages with Amanda Howell, IBCLC. Pricing is discussed on a discovery call.",
-  path: "/services",
+    "Choose your lactation support with Amanda Howell, IBCLC: packages for expecting mamas, and packages for when the baby is here.",
+  path: "/services/",
 });
 
 export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="Services/Packages"
-        title="Care for the season you are in"
-        lede="Packages are shaped around where you are — still expecting, home with a new baby, in a hard week, or sorting out oral function. There are no public rates on this page."
+        eyebrow="Packages"
+        title="Where are you right now?"
+        lede="Packages now live on two pages — one for planning ahead, one for help after your baby arrives. Pick the one that fits."
       />
 
       <section className="bg-page">
         <Container className="py-16 lg:py-20">
-          <p className="max-w-2xl leading-relaxed">
-            Visits are virtual, or in your home across the greater Charlotte
-            metro. If you are not sure which package fits, book a discovery
-            call and Amanda will help you choose.
-          </p>
-          <div className="mt-10">
-            <PackageTabs />
-          </div>
-        </Container>
-      </section>
-
-      <section className="bg-cream">
-        <Container className="flex flex-col items-start gap-8 py-16 lg:flex-row lg:items-center lg:justify-between lg:py-20">
-          <h2 className="max-w-xl text-4xl sm:text-5xl">
-            Not sure which one fits?
-          </h2>
-          <Cta href={site.calendly} external>
-            Book a discovery call
-          </Cta>
+          <PathCards headingLevel="h2" />
         </Container>
       </section>
     </>

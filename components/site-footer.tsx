@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Container } from "@/components/container";
 import { Wordmark } from "@/components/logo";
-import { nav, site } from "@/lib/site";
+import { contactLink, footerLinks, nav, site } from "@/lib/site";
+
+const explore = [...nav, contactLink, ...footerLinks];
 
 export function SiteFooter() {
   return (
@@ -20,7 +22,7 @@ export function SiteFooter() {
             Explore
           </p>
           <ul className="mt-4 space-y-2">
-            {nav.map((item) => (
+            {explore.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="text-cream hover:underline">
                   {item.label}
