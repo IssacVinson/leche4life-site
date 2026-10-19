@@ -3,13 +3,14 @@ import { Container } from "@/components/container";
 import { Cta } from "@/components/cta";
 import { ImageHero } from "@/components/image-hero";
 import { PackageBlock } from "@/components/package-block";
+import { PaymentNote } from "@/components/payment-note";
 import { pageMetadata } from "@/lib/seo";
 import { babyHerePackages } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "The Baby Is Here",
   description:
-    "In-home lactation help now with Amanda Howell, IBCLC: Signature, Emergency, Two-Pack, and Single Visit packages across the greater Charlotte metro.",
+    "In-home lactation help now with Amanda Howell, IBCLC: Nurtured Support, Single Visit, 2-Visit, Milk Rescue, and Tongue-Tie Support packages across the greater Charlotte metro.",
   path: "/baby-is-here/",
 });
 
@@ -39,6 +40,8 @@ export default function BabyIsHerePage() {
       {babyHerePackages.map((pkg, index) => (
         <PackageBlock key={pkg.id} pkg={pkg} index={index} cta={cta} />
       ))}
+
+      <PaymentNote />
 
       <section className="bg-cream">
         <Container className="flex flex-col items-start gap-8 py-16 lg:flex-row lg:items-center lg:justify-between lg:py-20">

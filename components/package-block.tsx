@@ -1,12 +1,13 @@
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Star } from "lucide-react";
 import { Container } from "@/components/container";
 import { Cta } from "@/components/cta";
 import { publicPath } from "@/lib/base-path";
 import type { SalesPackage } from "@/lib/site";
 import { cn } from "cn";
 
-function Accordion({ title, items }: { title: string; items: string[] }) {
+function Accordion({ title, items }: { title: string; items?: string[] }) {
+  if (!items?.length) return null;
   return (
     <details className="group border-b border-sage/70">
       <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-lg font-medium text-ink [&::-webkit-details-marker]:hidden">
@@ -69,16 +70,37 @@ export function PackageBlock({
         </div>
 
         <div className={cn(flipped && "lg:order-1")}>
+          {pkg.badge ? (
+            <p className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-cream px-4 py-1.5 text-sm font-semibold text-ink">
+              <Star aria-hidden="true" className="size-4" strokeWidth={1.5} />
+              {pkg.badge}
+            </p>
+          ) : null}
           <h2 id={headingId} className="text-4xl sm:text-5xl">
             {pkg.name}
           </h2>
-          <p className="lede mt-5">{pkg.forWho}</p>
+          {pkg.subtitle ? (
+            <p className="eyebrow mt-3">{pkg.subtitle}</p>
+          ) : null}
+          {pkg.description.map((paragraph) => (
+            <p key={paragraph} className="lede mt-5">
+              {paragraph}
+            </p>
+          ))}
 
-          <div className="mt-8 border-t border-sage/70">
-            <Accordion title="What’s included" items={pkg.included} />
-            <Accordion title="What we’ll cover" items={pkg.cover} />
-            <Accordion title="Visit breakdown" items={pkg.breakdown} />
-          </div>
+          {pkg.included?.length || pkg.cover?.length || pkg.breakdown?.length ? (
+            <div className="mt-8 border-t border-sage/70">
+              <Accordion title="What’s included" items={pkg.included} />
+              <Accordion title="What we’ll cover" items={pkg.cover} />
+              <Accordion title="Visit breakdown" items={pkg.breakdown} />
+            </div>
+          ) : null}
+
+          {pkg.closing?.map((paragraph) => (
+            <p key={paragraph} className="mt-6 leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
 
           <div className="mt-8 rounded-2xl bg-cream px-6 py-5">
             <p className="eyebrow">Investment</p>

@@ -47,64 +47,46 @@ export const serviceArea = [
 export const insuranceNote =
   "I don’t bill insurance directly, but I can provide a superbill you may submit for reimbursement, and FSA/HSA cards are often accepted — check with your plan.";
 
+export const paymentNote = [
+  "Payment is required to secure your appointment.",
+  "Accepted: Cash, Venmo, Zelle, HSA/FSA, or Square.",
+] as const;
+
 export type SalesPackage = {
   id: string;
   name: string;
-  /** Two or three sentences on who the package is for. */
-  forWho: string;
-  included: string[];
-  cover: string[];
-  breakdown: string[];
+  /** Short line under the name, e.g. a tagline or the visit type. */
+  subtitle?: string;
+  /** Small highlight shown above the name, e.g. "Most Popular". */
+  badge?: string;
+  /** Paragraphs introducing the package. */
+  description: string[];
+  included?: string[];
+  cover?: string[];
+  breakdown?: string[];
+  /** Paragraphs shown after the lists. */
+  closing?: string[];
   price: string;
   image: { src: string; alt: string };
 };
 
 export const expectingPackages: SalesPackage[] = [
   {
-    id: "prenatal-consultation",
-    name: "Prenatal Consultation",
-    forWho:
-      "For the mama who is still expecting and wants the first days of feeding to feel familiar instead of frantic. One virtual visit, from your own space, before your baby arrives.",
+    id: "prenatal-package",
+    name: "The Prenatal Package",
+    subtitle: "Held from Day One",
+    description: [
+      "A trusted partner from pregnancy through your baby’s first three months, not just information, but real support.",
+      "Invest in yourself and this pregnancy with evidence-based guidance from a holistic IBCLC who tailors care to your family. You’ll have expert help whenever you need it, so you can step into motherhood with clarity, calm, and confidence.",
+    ],
     included: [
-      "One virtual prenatal consultation",
-      "A plan shaped around your birth preferences and your return-to-work timing",
-      "Practical guidance for the person who will be supporting you at home",
+      "One prenatal visit, in-home or virtual",
+      "3 in-person visits",
+      "Direct, immediate 24/7 access via Voxer once baby is in your arms",
+      "Ongoing as needed Voxer support",
+      "3 months to use",
     ],
-    cover: [
-      "Latch, milk supply, newborn feeding patterns, and pumping",
-      "What the first days of feeding usually look like",
-      "The questions you would rather ask now than at 2 a.m.",
-    ],
-    breakdown: ["1 virtual prenatal consultation, before your baby arrives"],
-    price: "$200",
-    image: {
-      src: "/images/prenatal-consultation.jpg",
-      alt: "A pregnant woman in a lace top cradling her belly outdoors.",
-    },
-  },
-  {
-    id: "signature",
-    name: "Signature Package",
-    forWho:
-      "Continuous care from pregnancy into the early postpartum months. For the mama who wants her support in place before she needs it: preparation before birth, visits in your home after, and a way to reach Amanda between appointments.",
-    included: [
-      "The Prenatal Consultation (virtual)",
-      "4 in-home visits over 3 months after your baby arrives",
-      "Text support while you are in care",
-      "Scheduling that keeps your follow-up from slipping",
-    ],
-    cover: [
-      "Before birth: latch, supply, newborn feeding patterns, and pumping",
-      "After birth: a feeding assessment for you and your baby",
-      "Latch, position, comfort, and milk transfer",
-      "A written plan you can follow between visits, adjusted as feeding changes",
-    ],
-    breakdown: [
-      "Before baby: 1 virtual prenatal consultation",
-      "After baby: 4 in-home visits over 3 months",
-      "Throughout: text support between visits",
-    ],
-    price: "$1,100",
+    price: "$1,200",
     image: {
       src: "/images/expecting-signature.jpg",
       alt: "Sunlight falling across a pregnant belly.",
@@ -114,109 +96,91 @@ export const expectingPackages: SalesPackage[] = [
 
 export const babyHerePackages: SalesPackage[] = [
   {
-    id: "signature",
-    name: "Signature Package",
-    forWho:
-      "For the mama who wants steady, ongoing care through the early months, not a single fix. Amanda comes to you, assesses feeding where it actually happens, and stays reachable between visits.",
+    id: "nurtured-support",
+    name: "Nurtured Support",
+    badge: "Most Popular",
+    description: [
+      "Feeding challenges rarely resolve in a single visit, babies change fast, and what worked last week may not work this week. This program gives you a dedicated partner through every shift: 1 comprehensive virtual check-in plus 4 in-home visits, so you’re never left guessing between appointments.",
+    ],
     included: [
-      "4 in-home visits over 3 months",
-      "Text support between visits",
-      "A written plan you can follow between visits",
-      "Scheduling that keeps your follow-up from slipping",
+      "1 virtual check-in",
+      "4 in-home visits",
+      "Voxer message support between visits",
+      "3 months to use",
     ],
-    cover: [
-      "A feeding assessment for you and your baby",
-      "Latch, position, comfort, and milk transfer",
-      "Pain, weight, supply, and the questions that show up once you are home",
-      "Adjusting the plan as feeding changes in the early weeks",
+    closing: [
+      "This is where most families land, and for good reason: consistent, expert guidance through the early weeks means fewer surprises and faster progress.",
     ],
-    breakdown: [
-      "4 in-home visits, spread over 3 months",
-      "Text support throughout",
-    ],
-    price: "$995",
+    price: "$1,400",
     image: {
       src: "/images/baby-signature.jpg",
       alt: "A mother smiling down at her baby while breastfeeding at home.",
     },
   },
   {
-    id: "emergency",
-    name: "Emergency Package",
-    forWho:
-      "For the week feeding feels urgent: pain, a baby who will not latch, a supply scare, or a mastitis worry. Your first visit happens within a day or two, and two more follow in the same month.",
-    included: [
-      "3 in-home visits within 1 month",
-      "First visit within a day or two",
-      "A short-term plan to steady feeding",
-    ],
-    cover: [
-      "The problem in front of you, first",
-      "Assessment of comfort, latch, and milk transfer",
-      "Clear signs for when to call your medical provider",
-    ],
-    breakdown: [
-      "Visit 1: within a day or two",
-      "Visits 2 and 3: follow-ups within the same month",
-    ],
-    price: "$750",
-    image: {
-      src: "/images/emergency.jpg",
-      alt: "A close view of a baby breastfeeding and looking up at their mother.",
-    },
-  },
-  {
-    id: "two-pack",
-    name: "Two-Pack",
-    forWho:
-      "For families who want a clear start and one planned follow-up, without a longer package.",
-    included: [
-      "2 in-home visits within 3 weeks",
-      "An initial assessment and a feeding plan",
-      "Notes you can share with your baby’s other care providers",
-    ],
-    cover: [
-      "Assessment of latch, comfort, and milk transfer",
-      "What changed between visits, and refining what is working",
-      "Room to decide, after the second visit, whether you want more care",
-    ],
-    breakdown: [
-      "Visit 1: assessment and a feeding plan",
-      "Visit 2: follow-up within 3 weeks",
-    ],
-    price: "$550",
-    image: {
-      src: "/images/two-pack.jpg",
-      alt: "A mother’s hand cradling her baby’s tiny feet.",
-    },
-  },
-  {
     id: "single-visit",
-    name: "Single Visit",
-    forWho:
-      "A single visit when you want an experienced set of eyes, not an ongoing package. A fit for a specific question: bottles, pumping, solids, work, or weight.",
+    name: "Single Visit Option",
+    subtitle: "Initial Breastfeeding Consultation",
+    description: [
+      "A one-time, comprehensive feeding consultation in the comfort of your home.",
+    ],
     included: [
-      "1 in-home visit",
-      "1 week of support after your visit",
-      "A plan you leave with",
+      "Latch and positioning support",
+      "Oral function observation",
+      "Personalized feeding plan tailored to your baby’s needs",
+      "Parent education and guidance",
+      "Recommendations for continued support, if needed",
+      "Pump support for exclusive pumping",
+      "Bottle feeding guidance",
+      "1 week of email correspondence (text messaging not included)",
     ],
-    cover: [
-      "Assessment and teaching around your specific question",
-      "A plan for the days after the visit",
-      "Honest guidance about whether one visit is enough",
+    closing: [
+      "Ideal for families seeking an initial evaluation or individualized support in the later postpartum period.",
+      "Credit for this visit towards a package is considered.",
     ],
-    breakdown: ["1 in-home visit", "1 week of support afterward"],
-    price: "$300",
+    price: "$400",
     image: {
       src: "/images/single-visit.jpg",
       alt: "A laughing baby lying on a soft blanket at home.",
     },
   },
   {
+    id: "two-visit",
+    name: "2-Visit Package",
+    description: [
+      "Includes everything above, plus one additional in-person follow-up visit.",
+    ],
+    price: "$700",
+    image: {
+      src: "/images/two-pack.jpg",
+      alt: "A mother’s hand cradling her baby’s tiny feet.",
+    },
+  },
+  {
+    id: "milk-rescue",
+    name: "Milk Rescue",
+    subtitle: "Emergency Support Package",
+    description: [
+      "For urgent feeding concerns that need fast, hands-on attention: slow weight gain, delayed milk production, sore nipples, unresolving mastitis, or clogged milk ducts.",
+    ],
+    included: [
+      "3 visits, with the first visit within 24-48 hours of booking",
+      "Pre-approval is needed to secure this package",
+      "All 3 visits must be used within 4 weeks",
+      "4 weeks of Voxer (Texting Support)",
+    ],
+    price: "$1,050",
+    image: {
+      src: "/images/emergency.jpg",
+      alt: "A close view of a baby breastfeeding and looking up at their mother.",
+    },
+  },
+  {
     id: "tongue-tie",
     name: "Tongue-Tie Support",
-    forWho:
+    description: [
       "High-touch feeding support when oral function or a tongue-tie is part of the story — while you are deciding, and through the work around a release.",
+    ],
     included: [
       "A feeding assessment with attention to oral function",
       "Support while you decide whether a release is right for your baby",
