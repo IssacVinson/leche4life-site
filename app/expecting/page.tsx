@@ -3,13 +3,14 @@ import { Container } from "@/components/container";
 import { Cta } from "@/components/cta";
 import { ImageHero } from "@/components/image-hero";
 import { PackageBlock } from "@/components/package-block";
+import { PaymentNote } from "@/components/payment-note";
 import { pageMetadata } from "@/lib/seo";
 import { expectingPackages, site } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "I’m Expecting",
   description:
-    "Prenatal lactation planning with Amanda Howell, IBCLC: a virtual Prenatal Consultation or the Signature Package with in-home visits after birth across the greater Charlotte metro.",
+    "Prenatal lactation support with Amanda Howell, IBCLC: The Prenatal Package, with a prenatal visit, in-person visits after birth, and Voxer support across the greater Charlotte metro.",
   path: "/expecting/",
 });
 
@@ -40,11 +41,13 @@ export default function ExpectingPage() {
         <PackageBlock key={pkg.id} pkg={pkg} index={index} cta={cta} />
       ))}
 
+      <PaymentNote />
+
       <section className="bg-cream">
         <Container className="flex flex-col items-start gap-8 py-16 lg:flex-row lg:items-center lg:justify-between lg:py-20">
           <div>
             <h2 className="max-w-xl text-4xl sm:text-5xl">
-              Not sure which one fits?
+              Not sure if it’s the right fit?
             </h2>
             <p className="lede mt-4 max-w-xl">
               Book a short discovery call and Amanda will help you choose.
